@@ -34,6 +34,30 @@ family.
   UTF-8 yes
 - Result: PASS
 
-### Trial 2 — kit `check` + `bundle` (CLI)
+### Trial 2 — kit `check` + `bundle` (CLI) (25 Nov 2026, ~07:06 WITA)
 
-(Recorded after the check/bundle run below.)
+- Kit: fresh download, `kit.json` bundle_sha256
+  `4d2de2ee75cfc5fba1046621c13263e3d101687e7d2cd0526f468fdc6cb6c16e`
+  matches the live API `bundleSha256` exactly.
+- Bundle: `bundle.tar.gz`, 270011 bytes, sha256
+  `5c5f92d7d3e384b3e75d982e278f97a15fec95e2ca474da261ef7cc1219ed209`
+  (session b6a4334c, 37 turns; prompt from the scheduled
+  makefun-new-program-watch task, origin scheduled).
+- Check (`makefun check`, kit dev): **13 passed, 1 failed, 5 skipped,
+  5 checked at submission.**
+  - Pass: competition_open, snapshot, license_osi, entrypoint
+    (main.ts at root selects node22), transcripts_present,
+    transcripts_recorded, thinking_wellformed, thinking_in_window,
+    thinking_reproduces (50/52 lines authored, 96.1%),
+    thinking_turns (34 turns), thinking_revised (trial-log.md from
+    2 write/edit messages), transcripts_run_record,
+    thinking_own_work.
+  - FAIL (only one): thinking_priced — 0 usage rows attached. Expected
+    for a subagent: usage rows are written only once this run
+    completes. The coordinator re-runs the muse.db SELECT with both
+    agent ids and re-bundles; nothing to rebuild.
+  - At submission (site checks, not local failures): repo_public,
+    repo_owner, repo_created_after_open, commit_in_repo,
+    duplicate_snapshot. Repo is public, commit b5d8180 is pushed,
+    owner.json is committed.
+- Result: READY FOR COORDINATOR RE-BUNDLE + SUBMIT (no rebuild needed).
